@@ -1,3 +1,19 @@
+conda activate dpvo
+
+export CPLUS_INCLUDE_PATH=/usr/include/eigen3:$CPLUS_INCLUDE_PATH
+export C_INCLUDE_PATH=/usr/include/eigen3:$C_INCLUDE_PATH
+
+pip install --no-build-isolation .
+
+cd Pangolin
+rm -rf build && mkdir build && cd build
+cmake .. -DCMAKE_CXX_FLAGS="-D_GLIBCXX_USE_CXX11_ABI=1"
+make -j$(nproc) && sudo make install && sudo ldconfig
+cd ../..
+
+rm -rf DPViewer/build DPViewer/*.egg-info
+pip install --no-build-isolation ./DPViewer
+
 # Deep Patch Visual Odometry/SLAM
 This repository contains the source code for our papers:
 

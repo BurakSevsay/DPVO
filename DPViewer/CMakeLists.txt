@@ -22,7 +22,10 @@ SET(CMAKE_CUDA_ARCHITECTURES ${CUDA_ARCH_LIST})
 list(APPEND CMAKE_PREFIX_PATH ${TORCH_PATH})
 
 find_package(Torch REQUIRED)
+find_package(Python 3.12 REQUIRED COMPONENTS Interpreter Development)
 find_library(TORCH_PYTHON_LIBRARY torch_python PATHS "${TORCH_INSTALL_PREFIX}/lib")
+add_definitions(-D_GLIBCXX_USE_CXX11_ABI=1)
+
 
 include_directories(
     ${EIGEN_INCLUDE_DIRS}
